@@ -67,16 +67,40 @@ export default function StripScroll() {
     // ── Touch handlers (mobile drag) ───────────────────────────────
     let touchStartX = 0;
     let touchStartScroll = 0;
+    let touchLastX = 0;
+    let touchLastTime = 0;
+    let touchVelocity = 0;
 
     const onTouchStart = (e: TouchEvent) => {
       touchStartX = e.touches[0].clientX;
       touchStartScroll = strip.scrollLeft;
+      touchLastX = e.touches[0].clientX;
+      touchLastTime = Date.now();
+      touchVelocity = 0;
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
 
     const onTouchMove = (e: TouchEvent) => {
       const dx = e.touches[0].clientX - touchStartX;
       strip.scrollLeft = touchStartScroll - dx;
+
+      const now = Date.now();
+      const dt = now - touchLastTime;
+      if (dt > 0) touchVelocity = (e.touches[0].clientX - touchLastX) / dt;
+      touchLastX = e.touches[0].clientX;
+      touchLastTime = now;
+    };
+
+    const onTouchEnd = () => {
+      let v = touchVelocity * 14;
+      if (Math.abs(v) < 0.5) return;
+      const momentum = () => {
+        if (Math.abs(v) < 0.5) return;
+        strip.scrollLeft -= v;
+        v *= 0.92;
+        rafRef.current = requestAnimationFrame(momentum);
+      };
+      rafRef.current = requestAnimationFrame(momentum);
     };
 
     strip.style.cursor = "grab";
@@ -88,6 +112,7 @@ export default function StripScroll() {
     strip.addEventListener("mouseleave", onMouseLeave);
     strip.addEventListener("touchstart", onTouchStart, { passive: true });
     strip.addEventListener("touchmove",  onTouchMove,  { passive: true });
+    strip.addEventListener("touchend",   onTouchEnd,   { passive: true });
 
     return () => {
       strip.removeEventListener("mousedown",  onMouseDown);
@@ -96,6 +121,7 @@ export default function StripScroll() {
       strip.removeEventListener("mouseleave", onMouseLeave);
       strip.removeEventListener("touchstart", onTouchStart);
       strip.removeEventListener("touchmove",  onTouchMove);
+      strip.removeEventListener("touchend",   onTouchEnd);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
