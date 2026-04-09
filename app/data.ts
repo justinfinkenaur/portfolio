@@ -56,7 +56,7 @@ export const PROJECTS: Project[] = [
     industry: "Smart Home",
     stage: "Redesign, End-to-End",
     overview: [
-      "As Design Lead for the Echo Show out-of-box experience, I owned the full onboarding journey from unboxing to first-use activation. Getting a variety of stakeholders to converge on one seamless experience was the core challenge, requiring constant facilitation and design iteration across every screen and asset in the setup experience. The result was a streamlined out-of-box experience that successfully onboarded over 3 million Echo Show 15 customers.",
+      "As Design Lead for the Echo Show 15 out-of-box experience, I owned the full onboarding journey from unboxing to first-use activation. Getting a variety of stakeholders to converge on one seamless experience was the core challenge, requiring constant facilitation and design iteration across every screen and asset in the setup experience. The result was a streamlined out-of-box experience that successfully onboarded over 3 million Echo Show 15 customers.",
     ],
     challenge: [
       "I designed the setup experience for the Echo Show 15, Amazon's flagship smart home device built around shared, communal use. The challenge was to create a seamless onboarding flow that extended the existing Echo Show out-of-box framework while addressing the unique needs of a device intended for multiple users in a household.",
