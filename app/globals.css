@@ -120,6 +120,8 @@ body {
 .card {
   position: relative; overflow: hidden; border-radius: 10px;
   display: block; text-decoration: none; background: var(--mid);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 .card-bg {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -196,6 +198,8 @@ body {
 .cs-strip-card {
   flex-shrink: 0; border-radius: 10px; overflow: hidden; background: var(--mid);
   height: 640px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 /* Width is derived from aspect ratio × fixed height */
 .cs-strip-card img, .cs-strip-card .ph { width:100%;height:100%;object-fit:cover;display:block; }
@@ -207,6 +211,8 @@ body {
   overflow: hidden;
   background: var(--mid);
   border-radius: 10px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 .cs-full-img img, .cs-full-img .ph {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -493,6 +499,8 @@ body {
   width: calc(480px * 16 / 9);
   height: 480px;
   background: var(--mid);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 .home-carousel-img {
