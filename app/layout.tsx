@@ -18,7 +18,10 @@ export const metadata: Metadata = {
     description: "Product designer with 9+ years of experience at Capital One, Amazon, and Google.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     apple: "/apple-touch-icon.png",
   },
 };
