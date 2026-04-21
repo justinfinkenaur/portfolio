@@ -34,10 +34,10 @@ export const PROJECTS: Project[] = [
     ],
     approach: [
       "I started by interviewing small and medium business owners alongside customer support agents to understand the most common challenges faced when creating and managing ad campaigns. The research revealed a clear need for a service layer to bridge the gap between the platform's complexity and the support these business owners actually needed.",
-      "The solution had to adhere to a core set of principles: it needed to mediate and reduce complexity in real time, interpreting context and surfacing relevant information faster than a human agent. It had to keep pace with evolving advertising rules and policies, be available around the clock, and guide users toward appropriate actions without requiring them to understand the entire system — all while reducing cognitive load and preserving trust, control, and decision quality for the end user."
+      "The solution had to adhere to a core set of principles. It needed to mediate and reduce complexity in real time, interpret context, and surface relevant information faster than a human agent. It had to keep pace with evolving advertising rules and policies, be available around the clock, and guide users toward appropriate actions without requiring them to understand the entire system, all while reducing cognitive load and preserving trust, control, and decision quality for the end user."
     ],
     outcome: [
-      "The result was the Google Marketing Advisor — an agentic AI designed as a service layer that integrates directly within Google Ads. It provides all customers with the caliber of support previously only available through a customer support agent, offering real-time, personalized guidance at scale."
+      "The result was the Google Marketing Advisor, an agentic AI designed as a service layer that integrates directly within Google Ads. It provides all customers with the caliber of support previously only available through a customer support agent, offering real-time, personalized guidance at scale."
     ],
     colors: { a: "#1a1a2e", b: "#16213e", c: "#0f3460" },
     images: {
@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     ],
     approach: [
       "I started with the baseline setup experience across Echo Show devices and identified where communal-specific features needed to be introduced to the Echo Show 15. This meant incorporating Visual ID and Voice ID enrollment so the device could recognize individual household members, a widget selection step for personalized content display, and a wall mounting screen to help users place the device in a location accessible to everyone.",
-      "Research revealed that users needed to understand the benefits of features like Visual ID and Voice ID before they'd commit to enrolling — they wanted to know not just why these features mattered, but that the process would be quick and easy. This insight shaped how I framed each step, leading with clear value and emphasizing simplicity to keep users motivated to complete the full setup rather than skipping features they'd need later."
+      "Research revealed that users needed to understand the benefits of features like Visual ID and Voice ID before they'd commit to enrolling. They wanted to know not just why these features mattered, but that the process would be quick and easy. This insight shaped how I framed each step, leading with clear value and emphasizing simplicity to keep users motivated to complete the full setup rather than skipping features they'd need later."
     ],
     outcome: [
       "The result was a new end-to-end out-of-box experience that shipped with the launch of the Echo Show 15, meaning these communal features were part of the product from day one rather than arriving through a later software update. The setup enabled customers to better personalize their devices while supporting multiple users in the household. This streamlined experience successfully onboarded over 3 million Echo Show 15 customers."
@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     ],
     approach: [
       "I designed the feature around five core design principles: avoid distracting from what's on screen, make the window movable and out of the way, inherit the controls of the source device, appear as an alert or only when prompted, and remain scalable to other video content types. I validated these principles by prototyping and testing with Echo Show users to evaluate the feature's usefulness and usability.",
-      "The design ultimately addressed three distinct scenarios — video streaming, video calling, and video monitoring — each requiring its own set of interactions and behaviors."
+      "The design ultimately addressed three distinct scenarios: video streaming, video calling, and video monitoring, each requiring its own set of interactions and behaviors."
     ],
     outcome: [
       "The final design delivers a Picture-in-Picture experience that lets users maximize or close the window, mute and unmute audio and microphone controls, and freely drag the window around the screen. The feature launched across all Echo Show devices, reaching over 20 million active devices."
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
       "From those insights, I defined a set of experience outcomes to guide the design. The setup needed to consolidate enrollment and management into a single site, clearly outline every step to add the Buy with Prime widget, and offer contextual help with plain-language definitions throughout. These outcomes served as a framework for design decisions, keeping the work anchored to real merchant needs."
     ],
     outcome: [
-      "The result was a streamlined experience that empowers independent business owners to offer their customers the same benefits they'd expect from Amazon — fast shipping, free returns, and seamless checkout — without the complexity of navigating multiple disconnected tools.",
+      "The result was a streamlined experience that empowers independent business owners to offer their customers the same benefits they'd expect from Amazon: fast shipping, free returns, and seamless checkout, without the complexity of navigating multiple disconnected tools.",
       "Today, Buy with Prime helps over 50,000 third-party sellers connect Amazon's fulfillment and checkout infrastructure to their own storefronts, faster and with far less friction."
     ],
     colors: { a: "#1a0a00", b: "#2e1a00", c: "#3d2a10" },
