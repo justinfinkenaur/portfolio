@@ -24,7 +24,7 @@ export const PROJECTS: Project[] = [
     tagline: "Creating an agentic AI service layer that bridges the gap between complex problems and simple solutions.",
     program: ["End-to-End", "0→1 Design"],
     industry: "AdTech",
-    stage: "End-to-End",
+    stage: "End-to-End, 0→1",
     overview: [
       "As part of a larger UX team, I designed Google Marketing Advisor, an agentic AI tool that autonomously diagnoses and resolves customer issues, replacing the traditional call center model and reducing time-to-resolution.",
     ],
