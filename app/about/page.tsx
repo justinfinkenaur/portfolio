@@ -47,6 +47,13 @@ export default function About() {
             </p>
           </div>
           <div className="about-sidebar-group">
+            <p className="about-sidebar-label">Education</p>
+            <p className="about-sidebar-val">
+              Industrial Design<br />
+              Carnegie Mellon University
+            </p>
+          </div>
+          <div className="about-sidebar-group">
             <p className="about-sidebar-label">Focus Areas</p>
             <p className="about-sidebar-val">
               Agentic AI · Smart Home<br />
