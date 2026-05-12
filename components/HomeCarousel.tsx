@@ -180,7 +180,7 @@ export default function HomeCarousel({ projects, images }: Props) {
           <div className="home-carousel-overlay">
             <div className="home-carousel-info">
               <div className="home-carousel-name">{p.title}</div>
-              <div className="home-carousel-meta">{p.year} · {p.industry}</div>
+              <div className="home-carousel-meta">{p.industry}</div>
             </div>
           </div>
         </Link>

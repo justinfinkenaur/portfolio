@@ -78,10 +78,6 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
             <p className="cs-meta-label">Project Type</p>
             <p className="cs-meta-val">{p.stage}</p>
           </div>
-          <div>
-            <p className="cs-meta-label">Year</p>
-            <p className="cs-meta-val">{p.year}</p>
-          </div>
         </div>
 
         {/* Right: overview + expand */}
