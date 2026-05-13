@@ -153,9 +153,9 @@ export const PROJECTS: Project[] = [
     ],
     colors: { a: "#1a0a00", b: "#2e1a00", c: "#3d2a10" },
     images: {
-      strip: ["/p3-frame-a.png", "/p3-frame-b.png", "/p3-frame-c.png", "/p3-frame-d.png", "/p3-frame-e.png", "/p3-frame-f.png", "/p3-frame-g.png"],
+      strip: ["/p3-frame-a.png", "/p3-frame-b.png", "/p3-frame-c.png", "/p3-frame-d.png", "/p3-frame-e.png", "/p3-frame-f.png"],
       full: "",
-      stripRatios: ["2000/1205", "2000/1205", "2000/1205", "2000/1205", "2000/1205", "2000/1205", "2000/1205"],
+      stripRatios: ["2000/1205", "2000/1205", "2000/1205", "2000/1205", "2000/1205", "2000/1205"],
     },
   },
 ];
