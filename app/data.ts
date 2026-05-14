@@ -18,36 +18,6 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "project-one",
-    title: "Google Marketing Advisor",
-    year: "2024–2026",
-    tagline: "Creating an agentic AI service layer that bridges the gap between complex problems and simple solutions.",
-    program: ["End-to-End", "0→1 Design"],
-    industry: "AdTech",
-    stage: "End-to-End, 0→1",
-    overview: [
-      "As part of a larger UX team, I designed Google Marketing Advisor, an agentic AI tool that autonomously diagnoses and resolves customer issues, replacing the traditional call center model and reducing time-to-resolution.",
-    ],
-    challenge: [
-      "Google Ads is a complex platform with a steep learning curve. Small and medium business (SMB) owners, who lack dedicated marketing teams or ad operations expertise, struggle to navigate its features, set up campaigns effectively, and troubleshoot issues on their own.",
-      "Without access to concierge-level guidance, their only option is to contact customer support agents, a reactive and time-consuming process that leaves them waiting in queues rather than getting the timely help they need to keep their campaigns running and their ad spend working efficiently."
-    ],
-    approach: [
-      "I started by interviewing small and medium business owners alongside customer support agents to understand the most common challenges faced when creating and managing ad campaigns. The research revealed a clear need for a service layer to bridge the gap between the platform's complexity and the support these business owners actually needed.",
-      "The solution had to adhere to a core set of principles. It needed to mediate and reduce complexity in real time, interpret context, and surface relevant information faster than a human agent. It had to keep pace with evolving advertising rules and policies, be available around the clock, and guide users toward appropriate actions without requiring them to understand the entire system, all while reducing cognitive load and preserving trust, control, and decision quality for the end user."
-    ],
-    outcome: [
-      "The result was the Google Marketing Advisor, an agentic AI designed as a service layer that integrates directly within Google Ads. It provides all customers with the caliber of support previously only available through a customer support agent, offering real-time, personalized guidance at scale."
-    ],
-    colors: { a: "#1a1a2e", b: "#16213e", c: "#0f3460" },
-    images: {
-      strip: ["/p1-frame1.png", "/p1-frame2.png", "/p1-frame3.png"],
-      full: "",
-      video: "/p1-video.mp4",
-      stripRatios: ["2000/1122", "1249/2000", "2000/1122"],
-    },
-  },
-  {
     id: "project-two",
     title: "Amazon Echo Show 15 Out-of-Box Experience",
     year: "2020–2021",
