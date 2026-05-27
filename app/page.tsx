@@ -3,11 +3,10 @@ import Nav from "@/components/Nav";
 import HomeCarousel from "@/components/HomeCarousel";
 
 const IMAGES = [
-  "/p1-home.png",       // 1. Google Marketing Advisor
-  "/p2-home.png",       // 2. Amazon Echo Show 15 Out-of-Box Experience
-  "/p5-home.png",       // 3. Google Endpoint Management
-  "/p4-home.png",       // 4. Amazon Echo Show Picture-In-Picture
-  "/p3-home-new.png",   // 5. Amazon Buy with Prime
+  "/p2-home.png",       // 1. Amazon Echo Show 15 Out-of-Box Experience
+  "/p5-home.png",       // 2. Google Endpoint Management
+  "/p4-home.png",       // 3. Amazon Echo Show Picture-In-Picture
+  "/p3-home-new.png",   // 4. Amazon Buy with Prime
 ];
 
 export default function Home() {
