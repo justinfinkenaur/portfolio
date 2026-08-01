@@ -22,18 +22,19 @@ export default function Home() {
     <div style={{ background: "#ffffff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Nav theme="light" />
 
-      {/* Header */}
-      <header className="home-intro page-load-1">
-        <h1 className="home-intro-headline">
+      {/* Hero */}
+      <header className="hero page-load-1">
+        <h1 className="hero-headline">
           Simplifying complexity to orchestrate meaningful product experiences.
         </h1>
-        <p className="home-intro-sub">
+
+        <p className="hero-sub">
           I design products that cut through complexity. From smart home devices to agentic AI experiences, I've had the privilege of working across a wide range of products and domains. My work brings clarity, trust, and smarter decisions to the places where people and technology meet.
         </p>
       </header>
 
       {/* Carousel */}
-      <div className="page-load-2">
+      <div id="work" className="page-load-2">
         <HomeCarousel projects={carouselProjects} images={IMAGES} />
       </div>
 
@@ -43,7 +44,7 @@ export default function Home() {
         <ul className="footer-links">
           <li><a href="mailto:justin.finkenaur@gmail.com">Email</a></li>
           <li><a href="https://www.linkedin.com/in/justin-finkenaur/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="https://drive.google.com/file/d/1fU0IhtrdjhIjHEJbuyPuMbxksmt2uXUN/view?usp=sharing" target="_blank">Résumé</a></li>
+          <li><a href="https://drive.google.com/file/d/1fU0IhtrdjhIjHEJbuyPuMbxksmt2uXUN/view?usp=sharing" target="_blank">Resume</a></li>
         </ul>
       </footer>
     </div>

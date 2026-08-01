@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { PROJECTS } from "../../data";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
-import ExpandStory from "@/components/ExpandStory";
 import StripScroll from "@/components/StripScroll";
 
 export function generateStaticParams() {
@@ -11,130 +10,119 @@ export function generateStaticParams() {
 }
 
 const PH_CLASSES = ["ph1","ph2","ph3","ph4","ph5","ph6"];
-const PH_ALT     = ["ph4","ph5","ph6","ph1","ph2","ph3"];
 
 export default function CaseStudy({ params }: { params: { slug: string } }) {
   const idx = PROJECTS.findIndex(p => p.id === params.slug);
   if (idx === -1) notFound();
 
-  const p    = PROJECTS[idx];
+  const p  = PROJECTS[idx];
+  const ph = PH_CLASSES[idx];
+
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
-  const ph   = PH_CLASSES[idx];
-  const phB  = PH_ALT[idx];
+
+  const strip  = p.images?.strip ?? [];
+  const ratios = p.images?.stripRatios ?? [];
 
   return (
     <div className="cs">
       <Nav theme="light" />
 
-      {/* Title block */}
-      <section className="cs-top fade-in">
+      {/* Hero */}
+      <section className="cs-hero page-load-1">
         <h1 className="cs-title">{p.title}</h1>
         <p className="cs-tagline">{p.tagline}</p>
+
+        <div className="cs-hero-tags">
+          <span className="cs-tag cs-tag-industry">{p.industry}</span>
+          {p.program.map(t => (
+            <span key={t} className="cs-tag">{t}</span>
+          ))}
+        </div>
       </section>
 
-      {/* Horizontal scroll image strip — cursor drives scroll */}
-      <div className="cs-strip-wrapper fade-in">
-        <div className="cs-strip" style={p.images?.contain ? { alignItems: "flex-start" } : undefined}>
-          {p.images ? (
-            p.images.strip.map((src, i) => {
-              const ratio = p.images!.stripRatios?.[i] ?? "16/9";
-              const isContain = p.images!.contain || (p.images!.perCardContain?.[i] ?? false);
-              if (p.images!.contain) {
-                return (
-                  <div key={i} className="cs-strip-card" style={{ width: "auto", height: "auto" }}>
-                    <img src={src} alt={`${p.title} — ${i + 1}`} style={{height:"640px",width:"auto",objectFit:"contain",display:"block"}} />
-                  </div>
-                );
-              }
-              const w = `calc(640px * ${ratio.split("/")[0]} / ${ratio.split("/")[1]})`;
+      {/* Image carousel — drag to scroll */}
+      <div className="cs-strip-wrapper page-load-2">
+        <div className="cs-strip">
+          {strip.length > 0 ? (
+            strip.map((src, i) => {
+              const ratio = ratios[i] ?? "16/9";
+              const [rw, rh] = ratio.split("/");
               return (
-                <div key={i} className="cs-strip-card" style={{ width: w }}>
-                  <img src={src} alt={`${p.title} — ${i + 1}`} style={{width:"100%",height:"100%",objectFit: isContain ? "contain" : "cover",display:"block",background: isContain ? "#f5f5f5" : "transparent"}} />
+                <div
+                  key={i}
+                  className="cs-strip-card"
+                  style={{ aspectRatio: `${rw} / ${rh}` }}
+                >
+                  <img src={src} alt={`${p.title} — ${i + 1}`} draggable={false} />
                 </div>
               );
             })
           ) : (
-            <>
-              <div className="cs-strip-card"><div className={ph} style={{width:"100%",height:"100%"}} /></div>
-              <div className="cs-strip-card"><div className={phB} style={{width:"100%",height:"100%"}} /></div>
-              <div className="cs-strip-card"><div className={ph} style={{width:"100%",height:"100%",filter:"brightness(0.7)"}} /></div>
-              <div className="cs-strip-card"><div className={phB} style={{width:"100%",height:"100%"}} /></div>
-            </>
+            <div className="cs-strip-card" style={{ aspectRatio: "16 / 9" }}>
+              <div className={ph} style={{ width: "100%", height: "100%" }} />
+            </div>
           )}
         </div>
         <div className="cs-strip-hint">Drag to explore →</div>
       </div>
       <StripScroll />
 
-      {/* Metadata + body */}
-      <div className="cs-info reveal">
-        {/* Left: metadata */}
-        <div className="cs-meta-block">
-          <div>
-            <p className="cs-meta-label">Industry</p>
-            <p className="cs-meta-val">{p.industry}</p>
-          </div>
-          <div>
-            <p className="cs-meta-label">Project Type</p>
-            <p className="cs-meta-val">{p.stage}</p>
-          </div>
+      {/* Body */}
+      <article className="cs-article">
+        <div className="cs-lead reveal">
+          {p.overview.map((para, i) => <p key={i}>{para}</p>)}
         </div>
 
-        {/* Right: overview + expand */}
-        <div className="cs-body-col">
-          <div className="cs-body-big">
-            {p.overview.map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
+        <section className="cs-section reveal">
+          <h2 className="cs-h2">The Challenge</h2>
+          {p.challenge.map((para, i) => <p key={i} className="cs-p">{para}</p>)}
+        </section>
 
-          <ExpandStory>
-            <h3>The Challenge</h3>
-            {p.challenge.map((para, i) => <p key={i}>{para}</p>)}
-            <h3>The Approach</h3>
-            {p.approach.map((para, i) => <p key={i}>{para}</p>)}
-            <h3>The Outcome</h3>
-            {p.outcome.map((para, i) => <p key={i}>{para}</p>)}
-          </ExpandStory>
-        </div>
-      </div>
+        <section className="cs-section reveal">
+          <h2 className="cs-h2">The Approach</h2>
+          {p.approach.map((para, i) => <p key={i} className="cs-p">{para}</p>)}
+        </section>
 
-      {/* 16:9 image or video below story */}
+        <section className="cs-section reveal">
+          <h2 className="cs-h2">The Outcome</h2>
+          {p.outcome.map((para, i) => <p key={i} className="cs-p">{para}</p>)}
+        </section>
+      </article>
+
+      {/* Video / closing image — centered */}
       {p.images?.video ? (
-        <div style={{ padding: "0 40px 80px" }} className="reveal">
-          <div className="cs-full-img" style={{background:"var(--cream)",overflow:"hidden"}}>
-            <video src={p.images.video} autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center bottom",display:"block",transform:"scale(1.03)",transformOrigin:"center bottom"}} />
+        <div className="cs-media reveal">
+          <div className="cs-media-frame">
+            <video
+              src={p.images.video}
+              autoPlay loop muted playsInline
+              className="cs-media-el"
+            />
           </div>
         </div>
       ) : p.images?.full ? (
-        <div style={{ padding: "0 40px 80px" }} className="reveal">
-          <div className="cs-full-img">
-            <img src={p.images.full} alt={`${p.title} — detail`} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} />
+        <div className="cs-media reveal">
+          <div className="cs-media-frame">
+            <img src={p.images.full} alt={`${p.title} — detail`} className="cs-media-el" />
           </div>
         </div>
-      ) : !p.images && (
-        <div style={{ padding: "0 40px 80px" }} className="reveal">
-          <div className="cs-full-img">
-            <div className={ph} style={{width:"100%",height:"100%"}} />
-          </div>
-        </div>
-      )}
+      ) : null}
 
       {/* Next project */}
-      <Link href={`/work/${next.id}`} className="cs-next reveal">
-        <div>
-          <p className="cs-next-label">Next Case Study</p>
-          <div className="cs-next-title">{next.title}</div>
-        </div>
-        <div className="cs-next-arrow">→</div>
-      </Link>
+      <section className="cs-nextwrap reveal">
+        <Link href={`/work/${next.id}`} className="cs-nextbtn">
+          <span className="cs-nextbtn-label">Next project</span>
+          <span className="cs-nextbtn-title">{next.title}</span>
+          <span className="cs-nextbtn-arrow">→</span>
+        </Link>
+      </section>
 
       <footer className="footer">
         <span className="footer-copy">© {new Date().getFullYear()} Justin Finkenaur</span>
         <ul className="footer-links">
           <li><a href="mailto:justin.finkenaur@gmail.com">Email</a></li>
           <li><a href="https://www.linkedin.com/in/justin-finkenaur/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="https://drive.google.com/file/d/1fU0IhtrdjhIjHEJbuyPuMbxksmt2uXUN/view?usp=sharing" target="_blank">Résumé</a></li>
+          <li><a href="https://drive.google.com/file/d/1fU0IhtrdjhIjHEJbuyPuMbxksmt2uXUN/view?usp=sharing" target="_blank">Resume</a></li>
         </ul>
       </footer>
       <Reveal />

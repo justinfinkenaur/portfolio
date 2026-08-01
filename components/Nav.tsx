@@ -17,33 +17,37 @@ export default function Nav({ theme = "dark" }: NavProps) {
   }, []);
 
   const navClass = [
-    "nav",
+    "nav-wrap",
     !isLight ? "dark-bg" : "",
     scrolled ? "scrolled" : "",
   ].filter(Boolean).join(" ");
 
   return (
     <header className={navClass}>
-      <Link href="/" className={`nav-logo ${isLight && !scrolled ? "dark" : isLight ? "dark" : scrolled ? "dark" : "light"}`}>
-        Justin Finkenaur
-      </Link>
-      <nav>
-        <ul className="nav-links">
-          {[
-            { href: "/", label: "Work" },
-            { href: "/about", label: "About" },
-          ].map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={`${isLight || scrolled ? "dark" : "light"} ${p === href ? "active" : ""}`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="nav-pill">
+        <Link href="/" className="nav-logo">
+          Justin Finkenaur
+        </Link>
+
+        <nav className="nav-center">
+          <ul className="nav-links">
+            {[
+              { href: "/", label: "Work" },
+              { href: "/about", label: "About" },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href} className={p === href ? "active" : ""}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <a href="mailto:justin.finkenaur@gmail.com" className="nav-cta">
+          Get in touch
+        </a>
+      </div>
     </header>
   );
 }

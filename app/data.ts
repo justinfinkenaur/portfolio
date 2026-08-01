@@ -41,10 +41,10 @@ export const PROJECTS: Project[] = [
     ],
     colors: { a: "#1a1a2e", b: "#16213e", c: "#0f3460" },
     images: {
-      strip: ["/p1-frame1.png", "/p1-frame2.png", "/p1-frame3.png"],
+      strip: ["/p1-frame1.png", "/p1-frame2.png", "/p1-frame3.png", "/p1-frame4.png"],
       full: "",
       video: "/p1-video.mp4",
-      stripRatios: ["2000/1122", "1249/2000", "2000/1122"],
+      stripRatios: ["2000/1122", "1249/2000", "2000/1122", "2000/1123"],
     },
   },
   {
@@ -93,10 +93,10 @@ export const PROJECTS: Project[] = [
     outcome: ["I established a cohesive product direction and design system for Endpoint Management in education. I helped pilot a shared device experience for classroom tablets, enabling schools to deploy single device sets that multiple students could use with managed, individualized sessions, opening a practical path for districts that couldn't afford one-to-one device programs."],
     colors: { a: "#1a1a00", b: "#2e2e00", c: "#1e1e0a" },
     images: {
-      strip: ["/p5-frame1.png", "/p5-frame2.png", "/p5-frame3.png"],
+      strip: ["/p5-frame1.png", "/p5-frame2.png", "/p5-frame3.png", "/p5-frame4.png"],
       full: "",
-      stripRatios: ["2000/1409", "2000/1891", "2000/1357"],
-      perCardContain: [false, true, false],
+      stripRatios: ["2000/1409", "2000/1891", "2000/1357", "2000/1349"],
+      perCardContain: [false, true, false, false],
     },
   },
   {
@@ -159,3 +159,12 @@ export const PROJECTS: Project[] = [
     },
   },
 ];
+
+// Home carousel / project card images, keyed by project id
+export const HOME_IMAGES: Record<string, string> = {
+  "project-one":   "/p1-home.png",
+  "project-two":   "/p2-home.png",
+  "project-five":  "/p5-home.png",
+  "project-four":  "/p4-home.png",
+  "project-three": "/p3-home-new.png",
+};
