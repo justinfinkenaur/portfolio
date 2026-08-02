@@ -24,7 +24,7 @@ const GLANCE = [
   },
 ];
 
-const COMPANIES = ["Google", "Amazon", "Capital One", "Carnegie Mellon"];
+const COMPANIES = ["Google", "Amazon", "Capital One"];
 
 export default function About() {
   return (
@@ -50,7 +50,7 @@ export default function About() {
 
       {/* Companies */}
       <div className="about-companies reveal">
-        <p className="about-companies-label">Where I've worked and studied</p>
+        <p className="about-companies-label">Where I've worked</p>
         <div className="about-companies-row">
           {COMPANIES.map(c => (
             <span key={c} className="about-company">{c}</span>
@@ -85,7 +85,7 @@ export default function About() {
         <h2 className="about-section-title">A bit more context</h2>
         <div className="about-bio">
           <p>
-            I'm a product designer with 9+ years of experience simplifying complex systems and integrating AI to improve clarity, trust, and decision-making. My work spans smart home, e-commerce, retail, and agentic AI, with a focus on experiences that extend beyond the screen.
+            I'm a product designer with 9+ years of experience simplifying complex systems and integrating AI to improve clarity, trust, and decision-making. My work spans smart home, e-commerce, retail, and agentic AI, with a focus on experiences that extend beyond the screen. That thinking traces back to Carnegie Mellon, where I earned a BFA in Industrial Design and learned to treat products as systems rather than screens, shaped as much by physical form and context of use as by the interface itself.
           </p>
           <p>
             I'm drawn to problems where the stakes are personal, where a confusing flow means someone second-guesses a purchase, loses trust in a device in their home, or hesitates to act on a recommendation meant to help them. Whether I'm designing for an AI agent making decisions on someone's behalf or a first-time setup experience in someone's living room, I start from the same place: what does this person need to feel confident in this moment?
