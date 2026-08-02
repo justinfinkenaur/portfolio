@@ -12,7 +12,10 @@ export function generateStaticParams() {
 const PH_CLASSES = ["ph1","ph2","ph3","ph4","ph5","ph6"];
 
 export default function CaseStudy({ params }: { params: { slug: string } }) {
-  const idx = PROJECTS.findIndex(p => p.id === params.slug);
+  // Match case-insensitively so previously shared title-case links still
+  // resolve without needing a redirect rule that could loop on itself.
+  const slug = decodeURIComponent(params.slug).toLowerCase();
+  const idx = PROJECTS.findIndex(p => p.id.toLowerCase() === slug);
   if (idx === -1) notFound();
 
   const p  = PROJECTS[idx];
