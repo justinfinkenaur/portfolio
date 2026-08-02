@@ -33,7 +33,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
         <p className="cs-tagline">{p.tagline}</p>
 
         <div className="cs-hero-tags">
-          <span className="cs-tag cs-tag-industry">{p.industry}</span>
+          <span className="cs-tag">{p.industry}</span>
           {p.program.map(t => (
             <span key={t} className="cs-tag">{t}</span>
           ))}

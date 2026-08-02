@@ -199,12 +199,6 @@ body {
   border: 1px solid rgba(26,24,20,0.08);
   padding: 7px 14px; border-radius: 999px;
 }
-.cs-tag-industry {
-  color: var(--ink);
-  background: rgba(26,24,20,0.075);
-  border-color: rgba(26,24,20,0.14);
-  font-weight: 500;
-}
 
 /* image carousel */
 .cs-strip-wrapper { position: relative; padding-top: 52px; }
