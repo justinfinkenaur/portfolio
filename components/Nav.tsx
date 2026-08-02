@@ -24,6 +24,8 @@ export default function Nav({ theme = "dark" }: NavProps) {
 
   return (
     <header className={navClass}>
+      <Link href="/" className="site-name">Justin Finkenaur</Link>
+
       <div className="nav-pill">
         <nav className="nav-center">
           <ul className="nav-links">
@@ -40,6 +42,10 @@ export default function Nav({ theme = "dark" }: NavProps) {
           </ul>
         </nav>
       </div>
+
+      <a href="mailto:justin.finkenaur@gmail.com" className="site-cta">
+        Get in touch
+      </a>
     </header>
   );
 }

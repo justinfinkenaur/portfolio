@@ -34,12 +34,50 @@ body {
 /* NAV — floating pill */
 .nav-wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: center;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 18px 24px;
   pointer-events: none;
 }
+
+/* name — top left, same pill treatment as the nav */
+.site-name {
+  pointer-events: auto;
+  font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; white-space: nowrap;
+  color: var(--ink);
+  padding: 12px 20px; border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(26,24,20,0.09);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 1px 2px rgba(26,24,20,0.04), 0 8px 24px rgba(26,24,20,0.06);
+  transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.2s;
+}
+.site-name:hover { opacity: 0.62; }
+.nav-wrap.scrolled .site-name {
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 1px 2px rgba(26,24,20,0.05), 0 12px 32px rgba(26,24,20,0.09);
+}
+
+/* get in touch — top right, matches the primary button on About */
+.site-cta {
+  pointer-events: auto;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  text-decoration: none; white-space: nowrap;
+  color: #fff; background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 12px 24px; border-radius: 999px;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+.site-cta:hover {
+  background: #35302a; border-color: #35302a;
+  transform: translateY(-1px);
+}
 .nav-pill {
   pointer-events: auto;
+  position: absolute; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center;
   width: auto; max-width: 100%;
   padding: 8px 10px;
@@ -505,8 +543,13 @@ body {
 @media (max-width: 768px) {
 
   /* Nav */
-  .nav-wrap { padding: 12px 14px; }
+  .nav-wrap { padding: 12px 12px; }
   .nav-pill { padding: 8px 10px; }
+  .site-name {
+    font-size: 0.58rem; letter-spacing: 0.08em;
+    padding: 10px 12px;
+  }
+  .site-cta { font-size: 0.7rem; padding: 10px 14px; }
   .nav-links { gap: 2px; }
   .nav-links a { font-size: 0.74rem; padding: 6px 10px; }
 
