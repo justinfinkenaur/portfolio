@@ -18,7 +18,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "project-one",
+    id: "Google-Marketing-Advisor",
     title: "Google Marketing Advisor",
     year: "2024–2026",
     tagline: "Creating an agentic AI service layer that bridges the gap between complex problems and simple solutions.",
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "project-two",
+    id: "Amazon-Echo-Show-15-Out-of-Box-Experience",
     title: "Amazon Echo Show 15 Out-of-Box Experience",
     year: "2020–2021",
     tagline: "Designing a set up experience that incorporates an AI assistant from start to finish",
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "project-five",
+    id: "Google-Endpoint-Management",
     title: "Google Endpoint Management",
     year: "2022–2024",
     tagline: "Bringing the organizational power of device management to the classroom.",
@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "project-four",
+    id: "Amazon-Echo-Show-Picture-In-Picture",
     title: "Amazon Echo Show Picture-In-Picture",
     year: "2020–2021",
     tagline: "Always in view, never in the way.",
@@ -129,7 +129,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "project-three",
+    id: "Amazon-Buy-with-Prime",
     title: "Amazon Buy with Prime",
     year: "2021–2022",
     tagline: "The power of an e-commerce giant, designed for the independent business owner.",
@@ -162,9 +162,9 @@ export const PROJECTS: Project[] = [
 
 // Home carousel / project card images, keyed by project id
 export const HOME_IMAGES: Record<string, string> = {
-  "project-one":   "/p1-home.png",
-  "project-two":   "/p2-home.png",
-  "project-five":  "/p5-home.png",
-  "project-four":  "/p4-home.png",
-  "project-three": "/p3-home-new.png",
+  "Google-Marketing-Advisor":   "/p1-home.png",
+  "Amazon-Echo-Show-15-Out-of-Box-Experience":   "/p2-home.png",
+  "Google-Endpoint-Management":  "/p5-home.png",
+  "Amazon-Echo-Show-Picture-In-Picture":  "/p4-home.png",
+  "Amazon-Buy-with-Prime": "/p3-home-new.png",
 };
