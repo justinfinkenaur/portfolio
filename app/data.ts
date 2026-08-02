@@ -18,7 +18,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "Google-Marketing-Advisor",
+    id: "google-marketing-advisor",
     title: "Google Marketing Advisor",
     year: "2024–2026",
     tagline: "Creating an agentic AI service layer that bridges the gap between complex problems and simple solutions.",
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "Amazon-Echo-Show-15-Out-of-Box-Experience",
+    id: "amazon-echo-show-15-out-of-box-experience",
     title: "Amazon Echo Show 15 Out-of-Box Experience",
     year: "2020–2021",
     tagline: "Designing a set up experience that incorporates an AI assistant from start to finish",
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "Google-Endpoint-Management",
+    id: "google-endpoint-management",
     title: "Google Endpoint Management",
     year: "2022–2024",
     tagline: "Bringing the organizational power of device management to the classroom.",
@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "Amazon-Echo-Show-Picture-In-Picture",
+    id: "amazon-echo-show-picture-in-picture",
     title: "Amazon Echo Show Picture-In-Picture",
     year: "2020–2021",
     tagline: "Always in view, never in the way.",
@@ -129,7 +129,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: "Amazon-Buy-with-Prime",
+    id: "amazon-buy-with-prime",
     title: "Amazon Buy with Prime",
     year: "2021–2022",
     tagline: "The power of an e-commerce giant, designed for the independent business owner.",
@@ -162,9 +162,9 @@ export const PROJECTS: Project[] = [
 
 // Home carousel / project card images, keyed by project id
 export const HOME_IMAGES: Record<string, string> = {
-  "Google-Marketing-Advisor":   "/p1-home.png",
-  "Amazon-Echo-Show-15-Out-of-Box-Experience":   "/p2-home.png",
-  "Google-Endpoint-Management":  "/p5-home.png",
-  "Amazon-Echo-Show-Picture-In-Picture":  "/p4-home.png",
-  "Amazon-Buy-with-Prime": "/p3-home-new.png",
+  "google-marketing-advisor":   "/p1-home.png",
+  "amazon-echo-show-15-out-of-box-experience":   "/p2-home.png",
+  "google-endpoint-management":  "/p5-home.png",
+  "amazon-echo-show-picture-in-picture":  "/p4-home.png",
+  "amazon-buy-with-prime": "/p3-home-new.png",
 };
