@@ -116,14 +116,6 @@ export default function About() {
             >
               LinkedIn
             </a>
-            <a
-              href="https://drive.google.com/file/d/1fU0IhtrdjhIjHEJbuyPuMbxksmt2uXUN/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              Resume
-            </a>
           </div>
         </div>
       </section>

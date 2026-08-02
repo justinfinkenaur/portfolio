@@ -14,7 +14,10 @@ interface Props {
   images: string[];
 }
 
-const AUTO_SPEED = 1.2; // px per frame
+const AUTO_SPEED = 1.2;   // px per frame — the resting drift speed
+const EASE       = 0.022; // how quickly a flick decays back toward AUTO_SPEED
+const MAX_SPEED  = 70;    // clamp so a hard flick can't run away
+const FRAME_MS   = 16.67;
 
 export default function HomeCarousel({ projects, images }: Props) {
   const trackRef    = useRef<HTMLDivElement>(null);
@@ -23,11 +26,18 @@ export default function HomeCarousel({ projects, images }: Props) {
   const isDragging  = useRef(false);
   const startX      = useRef(0);
   const startScroll = useRef(0);
-  const velocity    = useRef(0);
   const lastX       = useRef(0);
   const lastTime    = useRef(0);
   const didDrag     = useRef(false);
   const setWidth    = useRef(0);
+
+  // Current scroll speed in px/frame. Eases toward a target every frame.
+  const speed       = useRef(AUTO_SPEED);
+  // Pointer velocity in px/ms, sampled during a drag.
+  const pointerVel  = useRef(0);
+  // After a flick we keep drifting even though the cursor is still over the
+  // carousel — hover-pause only re-engages once the pointer leaves and returns.
+  const postFlick   = useRef(false);
 
   // ── Clone cards for infinite loop ────────────────────────────
   useEffect(() => {
@@ -36,25 +46,21 @@ export default function HomeCarousel({ projects, images }: Props) {
 
     const origCards = Array.from(track.children) as HTMLElement[];
 
-    const clonesBefore = origCards.map(c => {
+    const makeClone = (c: HTMLElement) => {
       const cl = c.cloneNode(true) as HTMLElement;
       cl.setAttribute("aria-hidden", "true");
       cl.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
       return cl;
-    });
-    const clonesAfter = origCards.map(c => {
-      const cl = c.cloneNode(true) as HTMLElement;
-      cl.setAttribute("aria-hidden", "true");
-      cl.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
-      return cl;
-    });
+    };
+
+    const clonesBefore = origCards.map(makeClone);
+    const clonesAfter  = origCards.map(makeClone);
 
     clonesBefore.reverse().forEach(c => track.prepend(c));
-    clonesAfter.forEach(c  => track.append(c));
+    clonesAfter.forEach(c => track.append(c));
 
     const gap = 12;
-    const sw = origCards.reduce((sum, c) => sum + c.offsetWidth + gap, 0);
-    setWidth.current = sw;
+    setWidth.current = origCards.reduce((sum, c) => sum + c.offsetWidth + gap, 0);
 
     const beforeWidth = clonesBefore.reduce((sum, c) => sum + c.offsetWidth + gap, 0);
     track.scrollLeft = beforeWidth;
@@ -76,97 +82,110 @@ export default function HomeCarousel({ projects, images }: Props) {
     if (track.scrollLeft <= 0) track.scrollLeft += setWidth.current;
   };
 
-  // ── Auto-scroll loop ──────────────────────────────────────────
+  // ── Single animation loop: drift, flick decay, hover pause ────
   useEffect(() => {
     const tick = () => {
-      if (!isDragging.current && !isHovered.current) {
-        const track = trackRef.current;
-        if (track) {
-          track.scrollLeft += AUTO_SPEED;
+      const track = trackRef.current;
+
+      if (track && !isDragging.current) {
+        // Where the speed wants to settle
+        const target = (isHovered.current && !postFlick.current) ? 0 : AUTO_SPEED;
+
+        // Ease current speed toward the target — this is what makes a flick
+        // bleed off gradually instead of snapping back
+        speed.current += (target - speed.current) * EASE;
+
+        // Once we're close to the resting speed, hand control back to hover
+        if (postFlick.current && Math.abs(speed.current - AUTO_SPEED) < 0.15) {
+          postFlick.current = false;
+        }
+
+        if (Math.abs(speed.current) > 0.01) {
+          track.scrollLeft += speed.current;
           checkLoop();
         }
       }
+
       rafRef.current = requestAnimationFrame(tick);
     };
+
     rafRef.current = requestAnimationFrame(tick);
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, []);
 
-  // ── Drag handlers ─────────────────────────────────────────────
-  const onMouseDown = (e: React.MouseEvent) => {
+  // ── Shared drag start / move / end ────────────────────────────
+  const dragStart = (clientX: number) => {
     const track = trackRef.current;
     if (!track) return;
-    isDragging.current = true;
-    didDrag.current    = false;
-    startX.current     = e.clientX;
+    isDragging.current  = true;
+    didDrag.current     = false;
+    startX.current      = clientX;
     startScroll.current = track.scrollLeft;
-    lastX.current      = e.clientX;
-    lastTime.current   = Date.now();
-    velocity.current   = 0;
-    e.preventDefault();
+    lastX.current       = clientX;
+    lastTime.current    = performance.now();
+    pointerVel.current  = 0;
+    speed.current       = 0;
   };
 
-  const onMouseMove = (e: React.MouseEvent) => {
+  const dragMove = (clientX: number) => {
     if (!isDragging.current) return;
     const track = trackRef.current;
     if (!track) return;
-    const dx = e.clientX - startX.current;
+
+    const dx = clientX - startX.current;
     if (Math.abs(dx) > 4) didDrag.current = true;
     track.scrollLeft = startScroll.current - dx;
-    const now = Date.now();
+
+    const now = performance.now();
     const dt  = now - lastTime.current;
-    if (dt > 0) velocity.current = (e.clientX - lastX.current) / dt;
-    lastX.current  = e.clientX;
-    lastTime.current = now;
+    if (dt > 0) {
+      // Blend samples so a single jittery frame doesn't define the throw
+      const instant = (clientX - lastX.current) / dt;
+      pointerVel.current = pointerVel.current * 0.7 + instant * 0.3;
+      lastX.current    = clientX;
+      lastTime.current = now;
+    }
     checkLoop();
   };
 
-  const onMouseUp = () => {
+  const dragEnd = () => {
     if (!isDragging.current) return;
     isDragging.current = false;
-    // Momentum fling — then auto-scroll resumes naturally via the tick loop
-    let v = velocity.current * 14;
-    const track = trackRef.current;
-    if (!track || Math.abs(v) < 0.5) return;
-    const fling = () => {
-      if (Math.abs(v) < 0.5 || isHovered.current) return;
-      track.scrollLeft -= v;
-      v *= 0.92;
-      checkLoop();
-      requestAnimationFrame(fling);
-    };
-    requestAnimationFrame(fling);
-  };
 
-  // ── Touch ─────────────────────────────────────────────────────
-  const touchStart  = useRef(0);
-  const touchScroll = useRef(0);
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStart.current  = e.touches[0].clientX;
-    touchScroll.current = trackRef.current?.scrollLeft ?? 0;
-    isDragging.current  = true;
+    // If the pointer was resting when released, don't fling
+    const stale = performance.now() - lastTime.current > 90;
+    const v = stale ? 0 : pointerVel.current;
+
+    // Pointer velocity (px/ms, positive = dragging right) becomes scroll
+    // speed (px/frame, positive = scrolling right → content moves left)
+    let launch = -v * FRAME_MS;
+    launch = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, launch));
+
+    if (Math.abs(launch) > AUTO_SPEED) {
+      speed.current     = launch;
+      postFlick.current = true;
+    } else {
+      speed.current     = AUTO_SPEED;
+      postFlick.current = false;
+    }
   };
-  const onTouchMove = (e: React.TouchEvent) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.scrollLeft = touchScroll.current - (e.touches[0].clientX - touchStart.current);
-    checkLoop();
-  };
-  const onTouchEnd = () => { isDragging.current = false; };
 
   return (
     <div
       ref={trackRef}
       className="home-carousel"
-      style={{ cursor: isDragging.current ? "grabbing" : "grab" }}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onMouseUp={onMouseUp}
-      onMouseEnter={() => { isHovered.current = true;  }}
-      onMouseLeave={() => { isHovered.current = false; onMouseUp(); }}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      onMouseDown={e => { e.preventDefault(); dragStart(e.clientX); }}
+      onMouseMove={e => dragMove(e.clientX)}
+      onMouseUp={dragEnd}
+      onMouseEnter={() => { isHovered.current = true; }}
+      onMouseLeave={() => {
+        isHovered.current = false;
+        postFlick.current = false;
+        dragEnd();
+      }}
+      onTouchStart={e => dragStart(e.touches[0].clientX)}
+      onTouchMove={e => dragMove(e.touches[0].clientX)}
+      onTouchEnd={dragEnd}
     >
       {projects.map((p, i) => (
         <Link
