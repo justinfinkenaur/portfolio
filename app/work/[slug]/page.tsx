@@ -63,7 +63,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
             </div>
           )}
         </div>
-        <div className="cs-strip-hint">Drag to explore →</div>
+        <div className="cs-strip-hint">Drag to explore</div>
       </div>
       <StripScroll />
 
@@ -113,7 +113,6 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
         <Link href={`/work/${next.id}`} className="cs-nextbtn">
           <span className="cs-nextbtn-label">Next project</span>
           <span className="cs-nextbtn-title">{next.title}</span>
-          <span className="cs-nextbtn-arrow">→</span>
         </Link>
       </section>
 
