@@ -29,7 +29,7 @@ export default function Home() {
         </h1>
 
         <p className="hero-sub">
-          I design products that cut through complexity. From smart home devices to agentic AI experiences, I've had the privilege of working across a wide range of products and domains. My work brings clarity, trust, and smarter decisions to the places where people and technology meet.
+          I design products that cut through complexity. From smart home devices to agentic AI experiences, I've had the privilege of working across a wide range of industries. My work brings clarity, trust, and smarter decisions to the places where people and technology meet.
         </p>
       </header>
 
