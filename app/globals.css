@@ -739,3 +739,68 @@ body {
   animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) both;
   animation-delay: 0.3s;
 }
+
+/* PASSWORD GATE */
+.pw-page {
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px; background: var(--cream);
+}
+.pw-card {
+  width: 100%; max-width: 440px;
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.pw-name {
+  font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 36px;
+}
+.pw-headline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  font-weight: 500; letter-spacing: -0.02em; line-height: 1.15;
+  color: var(--ink); margin-bottom: 14px;
+}
+.pw-sub {
+  font-size: 0.98rem; line-height: 1.7;
+  color: var(--muted); margin-bottom: 32px; max-width: 42ch;
+}
+.pw-form { width: 100%; }
+.pw-label {
+  display: block; font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.pw-field {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 6px 6px 18px; border-radius: 999px;
+  background: #fff; border: 1px solid rgba(26,24,20,0.16);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pw-field:focus-within {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(26,24,20,0.06);
+}
+.pw-field.is-error { border-color: #B4432F; }
+.pw-field input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font-family: 'DM Sans', sans-serif; font-size: 0.98rem; color: var(--ink);
+  padding: 8px 0;
+}
+.pw-field input::placeholder { color: var(--muted); opacity: 0.8; }
+.pw-submit { padding: 11px 22px; }
+.pw-submit:disabled { opacity: 0.45; cursor: default; transform: none; }
+.pw-error {
+  font-size: 0.84rem; color: #B4432F; margin-top: 10px; min-height: 1.4em;
+}
+.pw-link {
+  margin-top: 28px; font-size: 0.84rem; color: var(--muted);
+  text-decoration: none; border-bottom: 1px solid var(--rule);
+  transition: color 0.2s, border-color 0.2s;
+}
+.pw-link:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 640px) {
+  .pw-field { flex-direction: column; align-items: stretch; padding: 6px; border-radius: 20px; }
+  .pw-field input { padding: 12px 14px; }
+  .pw-submit { width: 100%; padding: 14px 24px; }
+}
